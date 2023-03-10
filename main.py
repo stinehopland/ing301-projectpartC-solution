@@ -5,18 +5,19 @@
 # uvicorn main:app --reload
 
 from fastapi import FastAPI, Response, status
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
-
+app.mount("/", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def root():
     return {"message": "Welcome to SmartHouse Cloud REST API - Powered by FastAPI"}
 
-
-@app.get("/route/")
-async def read_routes():
-    return routes.routes
+#
+# @app.get("/route/")
+# async def read_routes():
+#     return routes.routes
 
 #
 # @app.get("/route/{rid}")
