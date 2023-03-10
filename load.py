@@ -1,7 +1,9 @@
+from pathlib import Path
+import time
+
 from smarthouse import SmartHouse
 from devices import *
-from pathlib import Path
-from persistence import SmartHousePersistence
+
 
 def load_demo_house_devices_map():
     file_path = str(Path(__file__).parent.absolute()) + "/demohus-devices.csv"
@@ -11,64 +13,6 @@ def load_demo_house_devices_map():
         for line in f.readlines():
             data = line.split(",")
             result[int(data[0])] = (data[2], data[3], data[4].strip())  # Supplier, Product, Serial No
-    return result
-
-
-def load_demo_house(persistence: SmartHousePersistence) -> SmartHouse:
-    result = SmartHouse()
-
-    # Creating floors
-    persistence.cursor.execute('SELECT MAX("floor") from rooms;')
-    no_floors = persistence.cursor.fetchone()[0]
-    for i in range(0, no_floors):
-        result.create_floor()
-
-    # Creating roooms
-    room_dict = {}
-    persistence.cursor.execute('SELECT id, "floor", area, name from rooms')
-    room_tuples = persistence.cursor.fetchall()
-    for room_tuple in room_tuples:
-        room = result.create_room(room_tuple[1], room_tuple[2], room_tuple[3])
-        room_dict[room_tuple[0]] = room
-
-    persistence.cursor.execute('SELECT id, room, "type" , producer, product_name, serial_no FROM devices')
-    device_tuples = persistence.cursor.fetchall()
-    for device_tuple in device_tuples:
-        id = device_tuple[0]
-        typ = device_tuple[2]
-        room = device_tuple[1]
-        producer = device_tuple[3]
-        product_name = device_tuple[4]
-        serial_no = device_tuple[5]
-
-        device = None
-        if typ == 'Smart Lys':
-            device = LightBulb(serial_no, producer, product_name)
-        elif typ == 'Fuktighetssensor':
-            device = HumiditySensor(serial_no, producer, product_name)
-        elif typ == 'Billader':
-            device = SmartCharger(serial_no, producer, product_name)
-        elif typ == 'Paneloven':
-            device = HeatOven(serial_no, producer, product_name)
-        elif typ == 'Temperatursensor':
-            device = TemperatureSensor(serial_no, producer, product_name)
-        elif typ == 'Strømmåler':
-            device = SmartMeter(serial_no, producer, product_name)
-        elif typ == 'Smart Stikkontakt':
-            device = SmartOutlet(serial_no, producer, product_name)
-        elif typ == 'Varmepumpe':
-            device = HeatPump(serial_no, producer, product_name)
-        elif typ == 'Luftkvalitetssensor':
-            device = AirQualitySensor(serial_no, producer, product_name)
-        elif typ == 'Gulvvarmepanel':
-            device = FloorHeatingPanel(serial_no, producer, product_name)
-        elif typ == 'Luftavfukter':
-            device = Dehumidifier(serial_no, producer, product_name)
-
-        if device:
-            device.set_persitence_info(id, persistence.cursor)
-            room_dict[room].register_device(device)
-
     return result
 
 
@@ -254,7 +198,7 @@ def main(smart_house: SmartHouse):
         print("- Find a device via its serial number (f)")
         print("- Move a device from one room to another (m)")
         print("- Quit (q)")
-        char = input()
+        char = input("Choice:> ")
         if char == "l":
             do_device_list(smart_house)
         elif char == "r":
@@ -268,8 +212,8 @@ def main(smart_house: SmartHouse):
         else:
             print(f"Error! Could not interpret input '{char}'!")
 
+        time.sleep(2)
 
 if __name__ == '__main__':
-    p = SmartHousePersistence("db.sqlite")
-    house = load_demo_house(p)
+    house = build_demo_house()
     main(house)
