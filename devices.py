@@ -1,6 +1,7 @@
-import abc
+#import abc
+from pydantic import BaseModel
 from typing import Optional
-from sqlite3 import Cursor
+
 
 # Visitor Design Patter
 class DeviceVisitor:

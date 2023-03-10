@@ -1,7 +1,7 @@
 from pathlib import Path
 import time
 
-from smarthouse import SmartHouse
+from smarthouseB import SmartHouse
 from devices import *
 
 
