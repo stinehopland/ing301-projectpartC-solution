@@ -8,7 +8,9 @@ Startkoden for prosjektet finnes i dette github repository
 
 TODO LENKE
 
-some dere kan bruke som mal (Use as Template) tilsvarende tidligere startkode for prosjektene. Startkoden inneholder klasser for devices og sensors samt konstruksjon av smarthus demo eksemplet. Om dere vil kan dere utskifte klassene med de klassene som dere selv har utvikler i prosjekt A og prosjekt B. 
+some dere kan bruke som mal (Use as Template) tilsvarende tidligere startkode for prosjektene. Startkoden inneholder klasser for devices og sensors samt konstruksjon av smarthus demo eksemplet. 
+
+Om dere vil, kan dere utskifte klassene med de klassene som dere selv har utvikler i prosjekt A og prosjekt B. Det er dat viktig at klassene implementeres som modeller i [Pydantic](https://docs.pydantic.dev/usage/models/) siden dette brukes av FastAPI som et underliggende rammeverk.
 
 I prosjekt C skal vi ikke integrere data-basen delen. Det er planen at dette skal gjøres i Del D sammen med implementasjon av klient-applikasjoner som bruker REST API'et utviklet i denne del av prosjektet.
 
