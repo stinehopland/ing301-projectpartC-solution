@@ -12,6 +12,20 @@ some dere kan bruke som mal (Use as Template) tilsvarende tidligere startkode fo
 
 I prosjekt C skal vi ikke integrere data-basen delen. Det er planen at dette skal gjøres i Del D sammen med implementasjon av klient-applikasjoner som bruker REST API'et utviklet i denne del av prosjektet.
 
+For å kunne bruke FastAPI rammeverket skal dette først installeres. Dette kan gjøres med:
+
+```
+pip3 install "fastapi[all]"
+```
+
+For å gjøre tjenesten som utvikles og for å laste den på nytt når der gjøre endringer i koden kan følgende brukes:
+
+```
+uvicorn main:app --reload
+```
+
+som gjør at tjenesten settes i drift ved å bruke `uvicorn` web-tjeneren. 
+
 For løsning av oppgaven kan det være en god ide å søke inspiration i eksemplet fra forelesningen i uke 12 der FastAPI ble brukt til å utvikle en REST API for sykkelcomputer eksemplet:
 
 Koden finnes her:
