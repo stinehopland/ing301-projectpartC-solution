@@ -47,6 +47,8 @@ TODO: lenke til video
 REST API'et som skal utvikles skal gjøre det mulig å hente informasjon om oppbygging av smarthuset viat følgene API endepunkter som alle skal returnere et svar i JSON-format.
 
 
+- `GET smarthouse/` - information on smarthouse
+- 
 - `GET smarthouse/floor` - information on all floors
 
 - `GET smarthouse/floor/{fid}` - information about a floor given by `fid` including rooms ids

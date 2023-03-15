@@ -7,30 +7,70 @@
 from fastapi import FastAPI, Response, status
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI()
-app.mount("/", StaticFiles(directory="static"), name="static")
+from setup import build_demo_house
 
+app = FastAPI()
+
+# http://localhost:8000/welcome/index.html
+app.mount("/welcome", StaticFiles(directory="static"), name="static")
+
+
+smart_house = build_demo_house()
+
+
+# http://localhost:8000/
 @app.get("/")
 async def root():
     return {"message": "Welcome to SmartHouse Cloud REST API - Powered by FastAPI"}
 
-#
-# @app.get("/route/")
-# async def read_routes():
-#     return routes.routes
 
-#
-# @app.get("/route/{rid}")
-# async def read_route(rid: int, response: Response):
-#     route = routes.read_route(rid)
-#     if route:
-#         return route
-#     else:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#
-#     return None
-#
-#
+@app.get("/smarthouse")
+async def read_smart_house():
+    return smart_house
+
+@app.get("/smarthouse/floor/")
+async def read_smart_house():
+    return smart_house.floors
+
+
+@app.get("/smarthouse/floor/{fid}")
+async def read_floor(fid: int, response: Response):
+
+    floor = smart_house.read_floor(fid)
+
+    if floor:
+        return floor
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+
+    return None
+
+
+@app.get("/smarthouse/floor/{fid}/room/")
+async def read_rooms(fid: int, response: Response):
+
+    rooms = smart_house.read_rooms(fid)
+
+    if rooms:
+        return rooms
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+
+    return None
+
+
+@app.get("/smarthouse/floor/{fid}/room/{rid}")
+async def read_room(fid: int, rid: int, response: Response):
+
+    room = smart_house.read_room(fid, rid)
+
+    if room:
+        return room
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+
+    return None
+
 # @app.put("/route/{rid}")
 # async def update_route(rid: int, route: Route, response: Response):
 #     updated_route = routes.update_route(rid, route)
