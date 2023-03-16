@@ -26,51 +26,66 @@ class Sensor(Device):
     def set_current_value(self, value: float):
         pass
 
+    @abc.abstractmethod
+    def delete_oldest_value(self):
+        pass
+
 
 class TemperatureSensor(Sensor):
 
-    temperature: float | None = None
+    temperature: list[float] | None = list()
     unit: str | None = "°C"
 
     def get_current_value(self) -> Optional[float]:
-        return self.temperature
+        return self.temperature[0]
 
     def set_current_value(self, temperature: float):
-        self.temperature = temperature
+        self.temperature.insert(0, temperature)
+
+    def delete_oldest_value(self):
+        self.temperature.pop()
 
 
 class HumiditySensor(Sensor):
 
-    humidity: float | None = None
+    humidity: list[float] | None = list()
     unit: str | None = "%"
 
     def get_current_value(self) -> Optional[float]:
-        return self.humidity
+        return self.humidity[0]
 
     def set_current_value(self, humidity: float):
-        self.humidity = humidity
+        self.humidity.insert(0, humidity)
+
+    def delete_oldest_value(self):
+        self.humidity.pop()
 
 
 class SmartMeter(Sensor):
 
-    energy_consumption: float | None = None
+    energy_consumption: list[float] | None = list()
     unit: str | None = "kWh"
 
     def get_current_value(self) -> Optional[float]:
-        return self.energy_consumption
+        return self.energy_consumption[0]
 
     def set_current_value(self, energy_consumption: float):
-        self.energy_consumption = energy_consumption
+        self.energy_consumption.insert(0, energy_consumption)
 
+    def delete_oldest_value(self):
+        self.energy_consumption.pop()
 
 class AirQualitySensor(Sensor):
 
-    air_quality: float | None = None
+    air_quality: list[float] | None = list()
     unit: str | None = "g/m^2"
 
     def get_current_value(self) -> Optional[float]:
-        return self.air_quality
+        return self.air_quality[0]
 
     def set_current_value(self, air_quality: float):
-        self.air_quality = air_quality
+        self.air_quality.insert(0, air_quality)
 
+    def delete_oldest_value(self):
+        self.air_quality.pop()
+        

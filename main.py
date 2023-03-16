@@ -101,14 +101,6 @@ async def create_device(rid: int, device: TemperatureSensor):
     return None
 
 
-@app.delete("/smarthouse/device/{did}")
-async def delete_device(did: int, response: Response):
-
-    device = smart_house.delete_device(did)
-
-    return create_response(device, response, status.HTTP_404_NOT_FOUND)
-
-
 @app.get("/smarthouse/sensor/{did}/current")
 async def read_current_value(did: int):
 
@@ -120,7 +112,7 @@ async def read_current_value(did: int):
     return None
 
 
-@app.put("/smarthouse/sensor/{did}/current")
+@app.post("/smarthouse/sensor/{did}/current")
 async def update_current_value(did: int, measurement: SensorMeasurement):
 
     device = smart_house.read_device(did)
@@ -129,6 +121,18 @@ async def update_current_value(did: int, measurement: SensorMeasurement):
         device.set_current_value(float(measurement.value))
 
     return device
+
+
+@app.delete("/smarthouse/sensor/{did}/oldest")
+async def delete_device(did: int, response: Response):
+
+    device = smart_house.read_device(did)
+
+    if device and device.is_sensor():
+        device.delete_oldest_value()
+
+    return device
+
 
 @app.get("/smarthouse/actuator/{did}/current")
 async def read_current_state(did: int):
