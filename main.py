@@ -7,10 +7,10 @@
 from fastapi import FastAPI, Response, status
 from fastapi.staticfiles import StaticFiles
 
-from setup import build_demo_house
+from demohouse import build_demo_house
 from device import Device
-from sensors import SensorMeasurement
-from actuators import ActuatorState
+from sensors import *
+from actuators import *
 
 
 app = FastAPI()
@@ -89,7 +89,7 @@ async def read_device(did: int, response: Response):
 
 
 @app.post("/smarthouse/room/{rid}/device/")
-async def create_device(rid: int, device):
+async def create_device(rid: int, device: TemperatureSensor):
 
     room = smart_house.find_room(rid)
 
