@@ -1,7 +1,13 @@
 from typing import Optional
 import abc
+from pydantic import BaseModel
 
 from device import Device
+
+
+class ActuatorState(BaseModel):
+
+    state: str
 
 
 class Actuator(Device):
@@ -28,8 +34,8 @@ class SimpleOnOffActuator(Actuator):
     def get_current_state(self):
         return self.is_active
 
-    def set_current_state(self, is_active):
-        self.is_active = is_active
+    def set_current_state(self, is_active: str):
+        self.is_active = bool(is_active)
 
 
 class HeatControlActuator(Actuator):
@@ -39,8 +45,8 @@ class HeatControlActuator(Actuator):
     def get_current_state(self):
         return self.temperature
 
-    def set_current_state(self, temperature):
-        self.temperature = temperature
+    def set_current_state(self, temperature: str):
+        self.temperature = float(temperature)
 
 
 class HeatOven(HeatControlActuator):

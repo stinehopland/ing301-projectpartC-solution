@@ -1,7 +1,13 @@
 import abc
 from typing import Optional
+from pydantic import BaseModel
 
 from device import Device
+
+
+class SensorMeasurement(BaseModel):
+
+    value: str
 
 
 class Sensor(Device):

@@ -9,6 +9,9 @@ from fastapi.staticfiles import StaticFiles
 
 from setup import build_demo_house
 from device import Device
+from sensors import SensorMeasurement
+from actuators import ActuatorState
+
 
 app = FastAPI()
 
@@ -86,14 +89,14 @@ async def read_device(did: int, response: Response):
 
 
 @app.post("/smarthouse/room/{rid}/device/")
-async def create_device(rid: int, device: Device):
+async def create_device(rid: int, device):
 
     room = smart_house.find_room(rid)
 
     if room:
         room.devices.append(device)
 
-        return device
+        return room
 
     return None
 
@@ -103,48 +106,46 @@ async def delete_device(did: int, response: Response):
 
     device = smart_house.delete_device(did)
 
-    create_response(device, response, status.HTTP_404_NOT_FOUND)
-
-
-
-@app.get("/smarthouse/actuator/{did}/current")
-async def read_device(did: int):
-
-    device = smart_house.read_device(did)
-
-    if device and device.is_actuator():
-        return device.get_current_state()
-
-    return None
+    return create_response(device, response, status.HTTP_404_NOT_FOUND)
 
 
 @app.get("/smarthouse/sensor/{did}/current")
-async def read_device(did: int):
+async def read_current_value(did: int):
 
     device = smart_house.read_device(did)
 
     if device and device.is_sensor():
-        return device.get_current_value()
+        return SensorMeasurement(value=str(device.get_current_value()))
 
     return None
 
 
 @app.put("/smarthouse/sensor/{did}/current")
-async def update_device(did: int, value: float, response: Response):
+async def update_current_value(did: int, measurement: SensorMeasurement):
 
     device = smart_house.read_device(did)
 
     if device and device.is_sensor():
-        device.set_current_value(value)
+        device.set_current_value(float(measurement.value))
 
     return device
 
-@app.put("/smarthouse/actuator/{did}/current")
-async def update_device(did: int, state: bool, response: Response):
+@app.get("/smarthouse/actuator/{did}/current")
+async def read_current_state(did: int):
 
     device = smart_house.read_device(did)
 
     if device and device.is_actuator():
-        device.set_current_state(state)
+        return ActuatorState(state=device.get_current_state())
+
+    return None
+
+@app.put("/smarthouse/actuator/{did}/current")
+async def update_current_state(did: int, state: ActuatorState, response: Response):
+
+    device = smart_house.read_device(did)
+
+    if device and device.is_actuator():
+        device.set_current_state(state.state)
 
     return device
