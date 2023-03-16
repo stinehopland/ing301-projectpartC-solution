@@ -8,6 +8,7 @@ from fastapi import FastAPI, Response, status
 from fastapi.staticfiles import StaticFiles
 
 from setup import build_demo_house
+from device import Device
 
 app = FastAPI()
 
@@ -79,7 +80,28 @@ async def read_device(did: int):
     return create_response(device, status.HTTP_404_NOT_FOUND)
 
 
-@app.get("/smarthouse/device/{did}/state")
+@app.post("/smarthouse/{rid}/device/")
+async def create_device(rid: int, device: Device):
+
+    room = smart_house.find_room(rid)
+
+    if room:
+        room.devices.append(device)
+
+        return device
+
+    return None
+
+
+@app.delete("/smarthouse/device/{did}")
+async def delete_device(did: int):
+
+    device = smart_house.delete_device(did)
+
+    create_response(device,  status.HTTP_404_NOT_FOUND)
+
+
+@app.get("/smarthouse/actuator/{did}/current")
 async def read_device(did: int):
 
     device = smart_house.read_device(did)
@@ -90,7 +112,7 @@ async def read_device(did: int):
     return None
 
 
-@app.get("/smarthouse/device/{did}/measurement")
+@app.get("/smarthouse/sensor/{did}/current")
 async def read_device(did: int):
 
     device = smart_house.read_device(did)
@@ -101,33 +123,17 @@ async def read_device(did: int):
     return None
 
 
-# @app.put("/route/{rid}")
-# async def update_route(rid: int, route: Route, response: Response):
-#     updated_route = routes.update_route(rid, route)
-#     if updated_route:
-#         return updated_route
-#     else:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#
-#     return None
-#
-#
-# @app.post("/route/", status_code=201)
-# async def create_route(route: Route):
-#     added_route = routes.create_route(route)
-#     return added_route
-#
-#
-# @app.delete("/route/{rid}")
-# async def delete_route(rid: int, response: Response):
-#     route = routes.delete_route(rid)
-#     if route:
-#         return route
-#     else:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#
-#     return None
-#
+@app.put("/smarthouse/sensor/{did}/current")
+async def update_device(did: int, value: float, response: Response):
+
+    device = smart_house.read_device(did)
+
+    if device and device.is_sensor():
+        device.set_current_value(value)
+
+    return device
+
+
 #
 # # GET /route/{rid}/gpspoint - all GPS points in the given route
 # @app.get("/route/{rid}/gpspoint")

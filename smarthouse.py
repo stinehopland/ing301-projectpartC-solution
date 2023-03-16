@@ -62,3 +62,38 @@ class SmartHouse (BaseModel):
                 return device
 
         return None
+
+    def find_room(self, rid):
+
+        for floor in self.floors:
+
+            rooms = floor.rooms
+
+            for room in rooms:
+
+                if room.rid == rid:
+                    return room
+
+        return None
+
+    def delete_device(self, did):
+
+        for floor in self.floors:
+
+            rooms = floor.rooms
+
+            for room in rooms:
+
+                devices = room.devices
+
+                for device in devices:
+
+                    if device.did == did:
+                        devices.remove(device)
+                        return device
+
+        return None
+
+
+
+
