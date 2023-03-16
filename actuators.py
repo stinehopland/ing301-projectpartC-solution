@@ -16,10 +16,16 @@ class SimpleOnOffActuator(Actuator):
 
     is_active: bool | None = False
 
+    def get_current_state(self):
+        return self.is_active
+
 
 class HeatControlActuator(Actuator):
 
     temperature: float | None = 18.5
+
+    def get_current_state(self):
+        return self.temperature
 
 
 class HeatOven(HeatControlActuator):
@@ -27,7 +33,7 @@ class HeatOven(HeatControlActuator):
 
 
 class LightBulb(SimpleOnOffActuator):
- 
+
     pass
 
 

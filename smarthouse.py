@@ -37,5 +37,28 @@ class SmartHouse (BaseModel):
 
         return None
 
+    def read_devices(self):
 
+        floors = self.floors
+        devices = list()
 
+        for floor in floors:
+
+            rooms = floor.rooms
+
+            for room in rooms:
+
+                devices.extend(room.devices)
+
+        return devices
+
+    def read_device(self, did):
+
+        devices = self.read_devices()
+
+        for device in devices:
+
+            if device.did == did:
+                return device
+
+        return None

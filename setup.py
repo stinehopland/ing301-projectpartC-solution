@@ -27,82 +27,37 @@ def build_demo_house() -> SmartHouse:
     devices_map = load_demo_house_devices_map()
 
     # # Creating 31 devices
-    device1 = LightBulb(serial_no=devices_map[1][2], producer=devices_map[1][0], product_type=devices_map[1][1], nickname=devices_map[8][3])
-    device2 = LightBulb(serial_no=devices_map[2][2], producer=devices_map[2][0], product_type=devices_map[2][1], nickname=devices_map[8][3])
-    device3 = HumiditySensor(serial_no=devices_map[3][2], producer=devices_map[3][0], product_type=devices_map[3][1], nickname=devices_map[8][3], humidity=68)
-    device4 = LightBulb(serial_no=devices_map[4][2], producer=devices_map[4][0], product_type=devices_map[4][1], nickname=devices_map[8][3])
-    device5 = LightBulb(serial_no=devices_map[5][2], producer=devices_map[5][0], product_type=devices_map[5][1], nickname=devices_map[8][3])
-    device6 = SmartCharger(serial_no=devices_map[6][2], producer=devices_map[6][0], product_type=devices_map[6][1], nickname=devices_map[8][3])
-    device7 = HeatOven(serial_no=devices_map[7][2], producer=devices_map[7][0], product_type=devices_map[7][1], nickname=devices_map[8][3])
-    device8 = TemperatureSensor(serial_no=devices_map[8][2], producer=devices_map[8][0], product_type=devices_map[8][1], nickname=devices_map[8][3], temperature=1.3)
-    device9 = LightBulb(serial_no=devices_map[9][2], producer=devices_map[9][0], product_type=devices_map[9][1], nickname=devices_map[8][3])
-    device10 = LightBulb(serial_no=devices_map[10][2], producer=devices_map[10][0], product_type=devices_map[10][1], nickname=devices_map[8][3])
-    device11 = SmartMeter(serial_no=devices_map[11][2], producer=devices_map[11][0], product_type=devices_map[1][1], nickname=devices_map[8][3], energy_consumption=0)
-    device12 = TemperatureSensor(serial_no=devices_map[12][2], producer=devices_map[12][0], product_type=devices_map[12][1], nickname=devices_map[8][3], temperature=18.1)
-    device13 = LightBulb(serial_no=devices_map[13][2], producer=devices_map[13][0], product_type=devices_map[13][1], nickname=devices_map[8][3])
-    device14 = SmartMeter(serial_no=devices_map[14][2], producer=devices_map[14][0], product_type=devices_map[14][1], nickname=devices_map[8][3], energy_consumption=1.5)
-    device15 = SmartOutlet(serial_no=devices_map[15][2], producer=devices_map[15][0], product_type=devices_map[15][1], nickname=devices_map[8][3])
-    device16 = HeatPump(serial_no=devices_map[16][2], producer=devices_map[16][0], product_type=devices_map[16][1], nickname=devices_map[8][3])
-    device17 = AirQualitySensor(serial_no=devices_map[17][2], producer=devices_map[17][0], product_type=devices_map[17][1], nickname=devices_map[8][3], air_quality=0.08)
-    device18 = SmartOutlet(serial_no=devices_map[18][2], producer=devices_map[18][0], product_type=devices_map[18][1], nickname=devices_map[8][3])
-    device19 = HeatOven(serial_no=devices_map[19][2], producer=devices_map[19][0], product_type=devices_map[19][1], nickname=devices_map[8][3])
-    device20 = SmartOutlet(serial_no=devices_map[20][2], producer=devices_map[20][0], product_type=devices_map[20][1], nickname=devices_map[8][3])
-    device21 = HumiditySensor(serial_no=devices_map[21][2], producer=devices_map[21][0], product_type=devices_map[21][1], nickname=devices_map[8][3])
-    device22 = Dehumidifier(serial_no=devices_map[22][2], producer=devices_map[22][0], product_type=devices_map[22][1], nickname=devices_map[8][3])
-    device23 = FloorHeatingPanel(serial_no=devices_map[23][2], producer=devices_map[23][0], product_type=devices_map[23][1], nickname=devices_map[8][3])
-    device24 = HeatOven(serial_no=devices_map[24][2], producer=devices_map[24][0], product_type=devices_map[24][1], nickname=devices_map[8][3])
-    device25 = LightBulb(serial_no=devices_map[25][2], producer=devices_map[25][0], product_type=devices_map[25][1], nickname=devices_map[8][3])
-    device26 = LightBulb(serial_no=devices_map[26][2], producer=devices_map[26][0], product_type=devices_map[26][1], nickname=devices_map[8][3])
-    device27 = HeatPump(serial_no=devices_map[27][2], producer=devices_map[27][0], product_type=devices_map[27][1], nickname=devices_map[8][3])
-    device28 = TemperatureSensor(serial_no=devices_map[28][2], producer=devices_map[28][0], product_type=devices_map[28][1], nickname=devices_map[8][3], temperature = 16.1)
-    device29 = LightBulb(serial_no=devices_map[29][2], producer=devices_map[29][0], product_type=devices_map[29][1], nickname=devices_map[8][3])
-    device30 = LightBulb(serial_no=devices_map[30][2], producer=devices_map[30][0], product_type=devices_map[30][1], nickname=devices_map[8][3])
-    device31 = HeatOven(serial_no=devices_map[31][2], producer=devices_map[31][0], product_type=devices_map[31][1], nickname=devices_map[8][3])
-    #
-    # # Sensor start values according to: https://github.com/selabhvl/ing301public/blob/main/project/demo.md#startverdier
-
-    # device3.humidity = 68
-    # device8.temperature = 1.3
-    # device11.energy_consumption = 0
-    # device12.temperature = 18.1
-    # device14.energy_consumption = 1.5
-    # device17.air_quality = 0.08
-    # device21.humidity = 52
-    # device28.temperature = 16.1
-    #
-    # # Registering devices in the right room
-    # house.register_device(device1, stue)
-    # house.register_device(device2, stue)
-    # house.register_device(device3, bath1)
-    # house.register_device(device4, guest1)
-    # house.register_device(device5, garage)
-    # house.register_device(device6, garage)
-    # house.register_device(device7, guest1)
-    # house.register_device(device8, entre)
-    # house.register_device(device9, entre)
-    # house.register_device(device10, entre)
-    # house.register_device(device11, stue)
-    # house.register_device(device12, stue)
-    # house.register_device(device13, entre)
-    # house.register_device(device14, entre)
-    # house.register_device(device15, stue)
-    # house.register_device(device16, stue)
-    # house.register_device(device17, stue)
-    # house.register_device(device18, stue)
-    # house.register_device(device19, office)
-    # house.register_device(device20, office)
-    # house.register_device(device21, bath2)
-    # house.register_device(device22, bath2)
-    # house.register_device(device23, bath2)
-    # house.register_device(device24, guest2)
-    # house.register_device(device25, bed)
-    # house.register_device(device26, bed)
-    # house.register_device(device27, bed)
-    # house.register_device(device28, bed)
-    # house.register_device(device29, bed)
-    # house.register_device(device30, dress)
-    # house.register_device(device31, guest3)
-
+    device1 = LightBulb(did=1, serial_no=devices_map[1][2], producer=devices_map[1][0], product_type=devices_map[1][1], nickname=devices_map[1][3])
+    device2 = LightBulb(did=2, serial_no=devices_map[2][2], producer=devices_map[2][0], product_type=devices_map[2][1], nickname=devices_map[2][3])
+    device3 = HumiditySensor(did=3, serial_no=devices_map[3][2], producer=devices_map[3][0], product_type=devices_map[3][1], nickname=devices_map[3][3], humidity=68)
+    device4 = LightBulb(did=4, serial_no=devices_map[4][2], producer=devices_map[4][0], product_type=devices_map[4][1], nickname=devices_map[4][3])
+    device5 = LightBulb(did=5, serial_no=devices_map[5][2], producer=devices_map[5][0], product_type=devices_map[5][1], nickname=devices_map[5][3])
+    device6 = SmartCharger(did=6, serial_no=devices_map[6][2], producer=devices_map[6][0], product_type=devices_map[6][1], nickname=devices_map[6][3])
+    device7 = HeatOven(did=7, serial_no=devices_map[7][2], producer=devices_map[7][0], product_type=devices_map[7][1], nickname=devices_map[7][3])
+    device8 = TemperatureSensor(did=8, serial_no=devices_map[8][2], producer=devices_map[8][0], product_type=devices_map[8][1], nickname=devices_map[8][3], temperature=1.3)
+    device9 = LightBulb(did=9, serial_no=devices_map[9][2], producer=devices_map[9][0], product_type=devices_map[9][1], nickname=devices_map[9][3])
+    device10 = LightBulb(did=10, serial_no=devices_map[10][2], producer=devices_map[10][0], product_type=devices_map[10][1], nickname=devices_map[10][3])
+    device11 = SmartMeter(did=11, serial_no=devices_map[11][2], producer=devices_map[11][0], product_type=devices_map[1][1], nickname=devices_map[11][3], energy_consumption=0)
+    device12 = TemperatureSensor(did=12, serial_no=devices_map[12][2], producer=devices_map[12][0], product_type=devices_map[12][1], nickname=devices_map[12][3], temperature=18.1)
+    device13 = LightBulb(did=13, serial_no=devices_map[13][2], producer=devices_map[13][0], product_type=devices_map[13][1], nickname=devices_map[13][3])
+    device14 = SmartMeter(did=14, serial_no=devices_map[14][2], producer=devices_map[14][0], product_type=devices_map[14][1], nickname=devices_map[14][3], energy_consumption=1.5)
+    device15 = SmartOutlet(did=15, serial_no=devices_map[15][2], producer=devices_map[15][0], product_type=devices_map[15][1], nickname=devices_map[15][3])
+    device16 = HeatPump(did=16, serial_no=devices_map[16][2], producer=devices_map[16][0], product_type=devices_map[16][1], nickname=devices_map[16][3])
+    device17 = AirQualitySensor(did=17, serial_no=devices_map[17][2], producer=devices_map[17][0], product_type=devices_map[17][1], nickname=devices_map[17][3], air_quality=0.08)
+    device18 = SmartOutlet(did=18, serial_no=devices_map[18][2], producer=devices_map[18][0], product_type=devices_map[18][1], nickname=devices_map[18][3])
+    device19 = HeatOven(did=19, serial_no=devices_map[19][2], producer=devices_map[19][0], product_type=devices_map[19][1], nickname=devices_map[19][3])
+    device20 = SmartOutlet(did=20, serial_no=devices_map[20][2], producer=devices_map[20][0], product_type=devices_map[20][1], nickname=devices_map[20][3])
+    device21 = HumiditySensor(did=21, serial_no=devices_map[21][2], producer=devices_map[21][0], product_type=devices_map[21][1], nickname=devices_map[21][3])
+    device22 = Dehumidifier(did=22, serial_no=devices_map[22][2], producer=devices_map[22][0], product_type=devices_map[22][1], nickname=devices_map[22][3])
+    device23 = FloorHeatingPanel(did=23, serial_no=devices_map[23][2], producer=devices_map[23][0], product_type=devices_map[23][1], nickname=devices_map[23][3])
+    device24 = HeatOven(did=24, serial_no=devices_map[24][2], producer=devices_map[24][0], product_type=devices_map[24][1], nickname=devices_map[24][3])
+    device25 = LightBulb(did=25, serial_no=devices_map[25][2], producer=devices_map[25][0], product_type=devices_map[25][1], nickname=devices_map[25][3])
+    device26 = LightBulb(did=26, serial_no=devices_map[26][2], producer=devices_map[26][0], product_type=devices_map[26][1], nickname=devices_map[26][3])
+    device27 = HeatPump(did=27, serial_no=devices_map[27][2], producer=devices_map[27][0], product_type=devices_map[27][1], nickname=devices_map[27][3])
+    device28 = TemperatureSensor(did=28, serial_no=devices_map[28][2], producer=devices_map[28][0], product_type=devices_map[28][1], nickname=devices_map[28][3], temperature=16.1)
+    device29 = LightBulb(did=29, serial_no=devices_map[29][2], producer=devices_map[29][0], product_type=devices_map[29][1], nickname=devices_map[29][3])
+    device30 = LightBulb(did=30, serial_no=devices_map[30][2], producer=devices_map[30][0], product_type=devices_map[30][1], nickname=devices_map[30][3])
+    device31 = HeatOven(did=31, serial_no=devices_map[31][2], producer=devices_map[31][0], product_type=devices_map[31][1], nickname=devices_map[31][3])
 
     # floor 1 and rooms
 
@@ -222,6 +177,7 @@ def main(smart_house: SmartHouse):
             print(f"Error! Could not interpret input '{char}'!")
 
         time.sleep(2)
+
 
 if __name__ == '__main__':
     house = build_demo_house()

@@ -17,6 +17,12 @@ app.mount("/welcome", StaticFiles(directory="static"), name="static")
 
 smart_house = build_demo_house()
 
+def create_response(body, error_code):
+
+    if body:
+        return body
+
+    return error_code
 
 # http://localhost:8000/
 @app.get("/")
@@ -26,50 +32,74 @@ async def root():
 
 @app.get("/smarthouse")
 async def read_smart_house():
-    return smart_house
+    return create_response(smart_house, status.HTTP_404_NOT_FOUND)
 
 @app.get("/smarthouse/floor/")
 async def read_smart_house():
-    return smart_house.floors
+    return create_response(smart_house.floors, status.HTTP_404_NOT_FOUND)
 
 
 @app.get("/smarthouse/floor/{fid}")
-async def read_floor(fid: int, response: Response):
+async def read_floor(fid: int):
 
     floor = smart_house.read_floor(fid)
 
-    if floor:
-        return floor
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-
-    return None
+    return create_response(floor, status.HTTP_404_NOT_FOUND)
 
 
 @app.get("/smarthouse/floor/{fid}/room/")
-async def read_rooms(fid: int, response: Response):
+async def read_rooms(fid: int):
 
     rooms = smart_house.read_rooms(fid)
 
-    if rooms:
-        return rooms
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
-
-    return None
+    return create_response(rooms, status.HTTP_404_NOT_FOUND)
 
 
 @app.get("/smarthouse/floor/{fid}/room/{rid}")
-async def read_room(fid: int, rid: int, response: Response):
+async def read_room(fid: int, rid: int):
 
     room = smart_house.read_room(fid, rid)
 
-    if room:
-        return room
-    else:
-        response.status_code = status.HTTP_404_NOT_FOUND
+    return create_response(room, status.HTTP_404_NOT_FOUND)
+
+
+@app.get("/smarthouse/device")
+async def read_devices():
+
+    devices = smart_house.read_devices()
+
+    return create_response(devices, status.HTTP_404_NOT_FOUND)
+
+
+@app.get("/smarthouse/device/{did}")
+async def read_device(did: int):
+
+    device = smart_house.read_device(did)
+
+    return create_response(device, status.HTTP_404_NOT_FOUND)
+
+
+@app.get("/smarthouse/device/{did}/state")
+async def read_device(did: int):
+
+    device = smart_house.read_device(did)
+
+    if device and device.is_actuator():
+        return device.get_current_state()
 
     return None
+
+
+@app.get("/smarthouse/device/{did}/measurement")
+async def read_device(did: int):
+
+    device = smart_house.read_device(did)
+
+    if device and device.is_sensor():
+        return device.get_current_value()
+
+    return None
+
 
 # @app.put("/route/{rid}")
 # async def update_route(rid: int, route: Route, response: Response):
