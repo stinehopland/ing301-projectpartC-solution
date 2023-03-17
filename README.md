@@ -84,3 +84,12 @@ Følgende skal leveres
 
 - Linke til github repository med implemetasjon av tjenesten
 - Eksportert test-collection fil fra Postman skal legge repository
+
+
+ 1131  source bin/activate
+ 1132  pip install --no-binary pydantic pydantic
+ 1133  pip install --no-binary fastapi fastapi
+ 1134  pwd
+ 1135  cd ..
+ 1136  cd ing301-projectpartC-solution
+ 1137  uvicorn main:app --reload
