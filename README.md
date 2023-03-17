@@ -1,16 +1,16 @@
 # ING301 prosjekt - Del C
 
-I del C av prosjektet skal dere implementere en REST API for en SmartHus sky-tjeneste ved bruk av rammeverket [FastAPI](https://fastapi.tiangolo.com)
+I del C av prosjektet skal dere implementere en REST API for en SmartHus sky-tjeneste ved bruk av rammeverket [FastAPI](https://fastapi.tiangolo.com).
 
 ## Setup og startkode
 
-Startkoden for prosjektet finnes i dette github repository 
+Start-koden for prosjektet finnes i dette github repository: 
 
-TODO LENKE
+https://github.com/selabhvl/ing301-projectpartC-startcode.git
 
-some dere kan bruke som mal (Use as Template) tilsvarende tidligere startkode for prosjektene. Startkoden inneholder klasser for devices og sensors samt konstruksjon av smarthus demo eksemplet. 
+some dere kan bruke som mal (**Use as Template**) tilsvarende tidligere startkode for prosjektene. Startkoden inneholder klasser for devices og sensors samt konstruksjon av smarthus demo eksemplet. 
 
-Om dere vil, kan dere utskifte klassene med de klassene som dere selv har utvikler i prosjekt A og prosjekt B. Det er dat viktig at klassene implementeres som modeller i [Pydantic](https://docs.pydantic.dev/usage/models/) siden dette brukes av FastAPI som et underliggende rammeverk.
+Om dere vil, kan dere utskifte klassene med de klassene som dere selv har utvikler i prosjekt A og prosjekt B. Det er da viktig at klassene implementeres som modeller i [Pydantic](https://docs.pydantic.dev/usage/models/) siden dette brukes av FastAPI som et underliggende rammeverk.
 
 I prosjekt C skal vi ikke integrere data-basen delen. Det er planen at dette skal gjøres i Del D sammen med implementasjon av klient-applikasjoner som bruker REST API'et utviklet i denne del av prosjektet.
 
@@ -20,7 +20,7 @@ For å kunne bruke FastAPI rammeverket skal dette først installeres. Dette kan 
 pip3 install "fastapi[all]"
 ```
 
-For å gjøre tjenesten som utvikles og for å laste den på nytt når der gjøre endringer i koden kan følgende brukes:
+For å kjøre tjenesten som utvikles og for å laste den på nytt når der gjøre endringer i koden kan følgende brukes:
 
 ```
 uvicorn main:app --reload
@@ -32,7 +32,7 @@ For løsning av oppgaven kan det være en god ide å søke inspiration i eksempl
 
 Koden finnes her:
 
-TODO LENKE
+https://github.com/selabhvl/ing301public/tree/main/examples/12_restapi_webservices
 
 Der er også hjelp å hente i dokumentasjonen for FastAPI som finnes via:
 
@@ -40,39 +40,47 @@ https://fastapi.tiangolo.com
 
 REST API'et skal dere teste ved å skrive noen test i [Postman](https://www.postman.com) verktøyet som også blev demonstrert på forelesningen i uke 11. 
 
-TODO: lenke til video
+TODO: Her kommer lenke til video
 
 ## REST API endepunkter
 
 REST API'et som skal utvikles skal gjøre det mulig å hente informasjon om oppbygging av smarthuset viat følgene API endepunkter som alle skal returnere et svar i JSON-format.
 
-
-- `GET smarthouse/` - information on smarthouse
+- `GET smarthouse/` - information on the smart house
 - 
 - `GET smarthouse/floor` - information on all floors
 
-- `GET smarthouse/floor/{fid}` - information about a floor given by `fid` including rooms ids
+- `GET smarthouse/floor/{fid}` - information about a floor given by `fid` 
  
-- `GET smarthouse/floor/{fid}/room/` - information about all rooms on a given floor
+- `GET smarthouse/floor/{fid}/room/` - information about all rooms on a given floor `fid`
 
-- `GET smarthouse/floor/{fid}/room/{rid}`- information about a specific room on a given floor including device ids
+- `GET smarthouse/floor/{fid}/room/{rid}`- information about a specific room `rid` on a given floor `fid`
 
-Videre skal API'et ha følgende endepunkter for tilgang til devices (sensorer og aktuatorer)
+API'et ha følgende endepunkter for tilgang til devices
 
 - `GET smarthouse/device` - information on all devices
+- `GET smarthouse/device/{did}` - information for a given device `did`
 
-- `GET smarthouse/device/{did}` - get information for a given device - meta information + current state (actuator) + current measurement (sensor)
+API'et ha følgende endepunkter for tilgang til sensorer
 
-- `GET smarthouse/device/{did}/measurements?count=>n>` - get n latest measurements from a device SENSOR vs. ACTUATOR?
+- `GET smarthouse/sensor/{did}/current` - get current sensor measurement for sensor `did`
 
-- `POST smarthouse/room/{rid}/device` - add new device in a room - will return representation including new id
+- `POST smarthouse/sensor/{did}/current` - add measurement for sensor `did`
 
-- `PUT smarthouse/device/{id}` - update a device - should we handle control this way on a actuator?
+- `GET smarthouse/sensor/{did}/values` - get all available measurements for sensor `did`
 
-- `DELETE smarthouse/device/{id}` - delete a device
+- `DELETE smarthouse/sensor/{did}/oldest` - delete oldest measurements for sensor `did`
+
+API'et ha følgende endepunkter for tilgang til aktuatorer
+
+- `GET smarthouse/actuator/{did}/current` - get current state for actuator `did`
+
+- `PUT smarthouse/device/{id}` - update current state for actuator `did`
+
 
 ## Levering av prosjekt
 
-- Linke til github repo
-- Linke til eksport json test fil fra Postman
-- Kan postman tester kjøres som del av github actions? https://medium.com/@liams_o/postman-tests-in-github-actions-pipeline-cd0adadf3dd2
+Følgende skal leveres
+
+- Linke til github repository med implemetasjon av tjenesten
+- Eksportert test-collection fil fra Postman skal legge repository
