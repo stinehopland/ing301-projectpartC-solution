@@ -6,6 +6,7 @@
 
 from fastapi import FastAPI, Response, status
 from fastapi.staticfiles import StaticFiles
+from typing import Union
 
 from demohouse import build_demo_house
 from device import Device
@@ -108,6 +109,23 @@ async def read_current_value(did: int):
 
     if device and device.is_sensor():
         return SensorMeasurement(value=str(device.get_current_value()))
+
+    return None
+
+
+@app.get("/smarthouse/sensor/{did}/values")
+async def read_values(did: int, limit: Union[int, None] = None):
+
+    device = smart_house.read_device(did)
+
+    if device and device.is_sensor():
+
+        measurements = device.get_current_values()
+        if limit and limit < len(measurements):
+            return measurements[0:limit]
+
+        else:
+            return measurements
 
     return None
 

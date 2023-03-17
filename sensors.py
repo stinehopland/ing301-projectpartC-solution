@@ -27,8 +27,13 @@ class Sensor(Device):
         pass
 
     @abc.abstractmethod
+    def get_current_values(self):
+        pass
+
+    @abc.abstractmethod
     def delete_oldest_value(self):
         pass
+
 
 
 class TemperatureSensor(Sensor):
@@ -38,6 +43,9 @@ class TemperatureSensor(Sensor):
 
     def get_current_value(self) -> Optional[float]:
         return self.temperature[0]
+
+    def get_current_values(self):
+        return self.temperature
 
     def set_current_value(self, temperature: float):
         self.temperature.insert(0, temperature)
@@ -54,6 +62,9 @@ class HumiditySensor(Sensor):
     def get_current_value(self) -> Optional[float]:
         return self.humidity[0]
 
+    def get_current_values(self):
+        return self.humidity
+
     def set_current_value(self, humidity: float):
         self.humidity.insert(0, humidity)
 
@@ -69,6 +80,9 @@ class SmartMeter(Sensor):
     def get_current_value(self) -> Optional[float]:
         return self.energy_consumption[0]
 
+    def get_current_values(self):
+        return self.energy_consumption
+
     def set_current_value(self, energy_consumption: float):
         self.energy_consumption.insert(0, energy_consumption)
 
@@ -82,6 +96,9 @@ class AirQualitySensor(Sensor):
 
     def get_current_value(self) -> Optional[float]:
         return self.air_quality[0]
+
+    def get_current_values(self):
+        return self.air_quality
 
     def set_current_value(self, air_quality: float):
         self.air_quality.insert(0, air_quality)

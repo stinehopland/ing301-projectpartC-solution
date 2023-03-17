@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "954856e3-62f2-41a7-bf35-815e83ab8f86",
+		"name": "ING301 SmartHouse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4079450"
+	},
+	"item": [
+		{
+			"name": "smarthouse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/floor",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"floor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floor - OK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/floor/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"floor",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floor - NOK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/floor/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"floor",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/floor/1/room",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"floor",
+						"1",
+						"room"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "room 1 - OK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/floor/1/room/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"floor",
+						"1",
+						"room",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "room - NOK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/floor/1/room/31",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"floor",
+						"1",
+						"room",
+						"31"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "devices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/device",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"device"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 1 on-off actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/device/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"device",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 31 heatoven actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/device/31",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"device",
+						"31"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 8 temperature sensor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/device/8",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"device",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 1 current state",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/actuator/1/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"actuator",
+						"1",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 1 current state",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"state\": \"True\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/smarthouse/actuator/1/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"actuator",
+						"1",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 8 current value",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/sensor/8/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"sensor",
+						"8",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 8 values",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/sensor/8/values",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"sensor",
+						"8",
+						"values"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 8 values limit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/smarthouse/sensor/8/values?limit=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"sensor",
+						"8",
+						"values"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 8 current value",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": \"3.1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/smarthouse/sensor/8/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"sensor",
+						"8",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "device 8 oldest",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8000/smarthouse/sensor/8/oldest",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"smarthouse",
+						"sensor",
+						"8",
+						"oldest"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
